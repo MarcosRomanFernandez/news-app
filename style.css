@@ -58,7 +58,7 @@ input[type="text"]{
 }
 
 button{
-    background-color: #1132c2;
+    background-color: #114bc2;
     color: #fff;
     padding: 8px 20px;
     border: none;
@@ -139,7 +139,7 @@ button{
 
 button:hover,
 .newsContent a:hover{
-    background-color: #e810fc;
+    background-color: #c4168c;
 }
 
 

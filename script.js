@@ -7,18 +7,17 @@ let currentKeyword = null;
 let isLoading = false;
 let lastArticleCount = 0;
 
-function fetchNews(isSearching){
+const fetchNews = isSearching=>{
     if (isLoading) return;
 
     isLoading = true;
     let url;
     if (isSearching){
-        const keyword = document.getElementById("searchKeyword").value;
+        const keyword = searchKeyword.value;
         url = `https://newsapi.org/v2/everything?q=${keyword}&apikey=${API_KEY}&page=${currentPage}`;
     } else {
         const category = currentCategory || document.getElementById("category").value;
         url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}&page=${currentPage}`;
-
     }
     fetch(url).then(response => response.json()).then(data =>{
         const newsContainer = document.getElementById('newsContainer');
@@ -65,7 +64,7 @@ function fetchNews(isSearching){
     });
 }
 
-function displayNoMoreNews(){
+const displayNoMoreNews = ()=>{
     const newsContainer = document.getElementById("newsContainer");
     newsContainer.innerHTML += '<p>No more news to load.</p>';
 }
@@ -77,13 +76,16 @@ onscroll = function (){
     }
 }
 
-document.getElementById('searchKeyword').addEventListener('input', function(){
+const searchKeyword = document.getElementById('searchKeyword');
+const fetchCategory = document.getElementById('fetchCategory');
+
+searchKeyword.addEventListener('input', function(){
     currentPage = 1;
     currentCategory = null;
     currentKeyword = this.value;
 });
 
-document.getElementById('fetchCategory').addEventListener("click", function (){
+fetchCategory.addEventListener("click", function (){
     currentPage = 1;
     currentKeyword = null;
     fetchNews(false);
